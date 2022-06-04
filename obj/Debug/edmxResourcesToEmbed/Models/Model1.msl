@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PayrollManagementSystemModelStoreContainer" CdmEntityContainer="PayrollManagementSystemEntities">
+    <EntitySetMapping Name="tbl_departments">
+      <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_departments">
+        <MappingFragment StoreEntitySet="tbl_departments">
+          <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+          <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_employee">
+      <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_employee">
+        <MappingFragment StoreEntitySet="tbl_employee">
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+          <ScalarProperty Name="emp_contact" ColumnName="emp_contact" />
+          <ScalarProperty Name="emp_cnic" ColumnName="emp_cnic" />
+          <ScalarProperty Name="emp_dob" ColumnName="emp_dob" />
+          <ScalarProperty Name="emp_image" ColumnName="emp_image" />
+          <ScalarProperty Name="emp_gender" ColumnName="emp_gender" />
+          <ScalarProperty Name="emp_email" ColumnName="emp_email" />
+          <ScalarProperty Name="emp_hireDate" ColumnName="emp_hireDate" />
+          <ScalarProperty Name="emp_status" ColumnName="emp_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_EmployeWorkingStatus">
+      <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_EmployeWorkingStatus">
+        <MappingFragment StoreEntitySet="tbl_EmployeWorkingStatus">
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="status_emp_fk" ColumnName="status_emp_fk" />
+          <ScalarProperty Name="status_dep_fk" ColumnName="status_dep_fk" />
+          <ScalarProperty Name="status_year" ColumnName="status_year" />
+          <ScalarProperty Name="status_basicSalary" ColumnName="status_basicSalary" />
+          <ScalarProperty Name="status_bonus" ColumnName="status_bonus" />
+          <ScalarProperty Name="status_medical" ColumnName="status_medical" />
+          <ScalarProperty Name="staus_casualLeave" ColumnName="staus_casualLeave" />
+          <ScalarProperty Name="staus_sickLeave" ColumnName="staus_sickLeave" />
+          <ScalarProperty Name="staus_halfDays" ColumnName="staus_halfDays" />
+          <ScalarProperty Name="staus_anualLeave" ColumnName="staus_anualLeave" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VW_GETEMPLOYEE">
+      <EntityTypeMapping TypeName="PayrollManagementSystemModel.VW_GETEMPLOYEE">
+        <MappingFragment StoreEntitySet="VW_GETEMPLOYEE">
+          <ScalarProperty Name="Annual_Leaves" ColumnName="Annual Leaves" />
+          <ScalarProperty Name="Sick_Leaves" ColumnName="Sick Leaves" />
+          <ScalarProperty Name="Annual_Casual_Leaves" ColumnName="Annual Casual Leaves" />
+          <ScalarProperty Name="Medical_Alowance" ColumnName="Medical Alowance" />
+          <ScalarProperty Name="Annual_Bonus" ColumnName="Annual Bonus" />
+          <ScalarProperty Name="Basic_Salary" ColumnName="Basic Salary" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Hire_Date" ColumnName="Hire Date" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Date_of_Birth" ColumnName="Date of Birth" />
+          <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_feedback">
+      <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_feedback">
+        <MappingFragment StoreEntitySet="tbl_feedback">
+          <ScalarProperty Name="fb_feedback" ColumnName="fb_feedback" />
+          <ScalarProperty Name="fb_company" ColumnName="fb_company" />
+          <ScalarProperty Name="fb_email" ColumnName="fb_email" />
+          <ScalarProperty Name="fb_phone" ColumnName="fb_phone" />
+          <ScalarProperty Name="fb_name" ColumnName="fb_name" />
+          <ScalarProperty Name="fb_id" ColumnName="fb_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_login">
+      <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_login">
+        <MappingFragment StoreEntitySet="tbl_login">
+          <ScalarProperty Name="pasword" ColumnName="pasword" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="login_id" ColumnName="login_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_inquiry">
+      <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_inquiry">
+        <MappingFragment StoreEntitySet="tbl_inquiry">
+          <ScalarProperty Name="iq_query" ColumnName="iq_query" />
+          <ScalarProperty Name="iq_company" ColumnName="iq_company" />
+          <ScalarProperty Name="iq_phone" ColumnName="iq_phone" />
+          <ScalarProperty Name="iq_email" ColumnName="iq_email" />
+          <ScalarProperty Name="iq_name" ColumnName="iq_name" />
+          <ScalarProperty Name="iq_id" ColumnName="iq_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

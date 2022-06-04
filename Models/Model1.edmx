@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PayrollManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_departments">
+          <Key>
+            <PropertyRef Name="dept_id" />
+          </Key>
+          <Property Name="dept_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dept_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_employee">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="emp_contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="emp_cnic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="emp_dob" Type="date" />
+          <Property Name="emp_gender" Type="bit" />
+          <Property Name="emp_email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="emp_hireDate" Type="date" />
+          <Property Name="emp_status" Type="bit" />
+          <Property Name="emp_image" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="tbl_EmployeWorkingStatus">
+          <Key>
+            <PropertyRef Name="status_id" />
+          </Key>
+          <Property Name="status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status_emp_fk" Type="int" />
+          <Property Name="status_dep_fk" Type="int" />
+          <Property Name="status_year" Type="int" />
+          <Property Name="status_basicSalary" Type="float" />
+          <Property Name="status_bonus" Type="float" />
+          <Property Name="status_medical" Type="float" />
+          <Property Name="staus_casualLeave" Type="int" />
+          <Property Name="staus_sickLeave" Type="int" />
+          <Property Name="staus_halfDays" Type="int" />
+          <Property Name="staus_anualLeave" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_feedback">
+          <Key>
+            <PropertyRef Name="fb_id" />
+          </Key>
+          <Property Name="fb_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fb_name" Type="nvarchar" MaxLength="25" />
+          <Property Name="fb_phone" Type="nvarchar" MaxLength="25" />
+          <Property Name="fb_email" Type="nvarchar" MaxLength="25" />
+          <Property Name="fb_company" Type="nvarchar" MaxLength="25" />
+          <Property Name="fb_feedback" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_inquiry">
+          <Key>
+            <PropertyRef Name="iq_id" />
+          </Key>
+          <Property Name="iq_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iq_name" Type="nvarchar" MaxLength="25" />
+          <Property Name="iq_email" Type="nvarchar" MaxLength="25" />
+          <Property Name="iq_phone" Type="nvarchar" MaxLength="25" />
+          <Property Name="iq_company" Type="nvarchar" MaxLength="25" />
+          <Property Name="iq_query" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="tbl_login">
+          <Key>
+            <PropertyRef Name="login_id" />
+          </Key>
+          <Property Name="login_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="25" />
+          <Property Name="pasword" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PayrollManagementSystem.dbo.VW_GETEMPLOYEE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_GETEMPLOYEE">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="CNIC" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CNIC" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date of Birth" Type="date" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Hire Date" Type="date" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Basic Salary" Type="float" />
+          <Property Name="Annual Bonus" Type="float" />
+          <Property Name="Medical Alowance" Type="float" />
+          <Property Name="Annual Casual Leaves" Type="int" />
+          <Property Name="Sick Leaves" Type="int" />
+          <Property Name="Annual Leaves" Type="int" />
+        </EntityType>
+        <Association Name="FK__tbl_Emplo__statu__2B3F6F97">
+          <End Role="tbl_employee" Type="Self.tbl_employee" Multiplicity="0..1" />
+          <End Role="tbl_EmployeWorkingStatus" Type="Self.tbl_EmployeWorkingStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_employee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tbl_EmployeWorkingStatus">
+              <PropertyRef Name="status_emp_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Emplo__statu__2C3393D0">
+          <End Role="tbl_departments" Type="Self.tbl_departments" Multiplicity="0..1" />
+          <End Role="tbl_EmployeWorkingStatus" Type="Self.tbl_EmployeWorkingStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_departments">
+              <PropertyRef Name="dept_id" />
+            </Principal>
+            <Dependent Role="tbl_EmployeWorkingStatus">
+              <PropertyRef Name="status_dep_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PayrollManagementSystemModelStoreContainer">
+          <EntitySet Name="tbl_departments" EntityType="Self.tbl_departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_employee" EntityType="Self.tbl_employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_EmployeWorkingStatus" EntityType="Self.tbl_EmployeWorkingStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_feedback" EntityType="Self.tbl_feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_inquiry" EntityType="Self.tbl_inquiry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_login" EntityType="Self.tbl_login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_GETEMPLOYEE" EntityType="Self.VW_GETEMPLOYEE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_GETEMPLOYEE].[ID] AS [ID], 
+    [VW_GETEMPLOYEE].[Name] AS [Name], 
+    [VW_GETEMPLOYEE].[Department] AS [Department], 
+    [VW_GETEMPLOYEE].[CNIC] AS [CNIC], 
+    [VW_GETEMPLOYEE].[Date of Birth] AS [Date of Birth], 
+    [VW_GETEMPLOYEE].[Email] AS [Email], 
+    [VW_GETEMPLOYEE].[Hire Date] AS [Hire Date], 
+    [VW_GETEMPLOYEE].[Year] AS [Year], 
+    [VW_GETEMPLOYEE].[Basic Salary] AS [Basic Salary], 
+    [VW_GETEMPLOYEE].[Annual Bonus] AS [Annual Bonus], 
+    [VW_GETEMPLOYEE].[Medical Alowance] AS [Medical Alowance], 
+    [VW_GETEMPLOYEE].[Annual Casual Leaves] AS [Annual Casual Leaves], 
+    [VW_GETEMPLOYEE].[Sick Leaves] AS [Sick Leaves], 
+    [VW_GETEMPLOYEE].[Annual Leaves] AS [Annual Leaves]
+    FROM [dbo].[VW_GETEMPLOYEE] AS [VW_GETEMPLOYEE]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tbl_Emplo__statu__2B3F6F97" Association="Self.FK__tbl_Emplo__statu__2B3F6F97">
+            <End Role="tbl_employee" EntitySet="tbl_employee" />
+            <End Role="tbl_EmployeWorkingStatus" EntitySet="tbl_EmployeWorkingStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Emplo__statu__2C3393D0" Association="Self.FK__tbl_Emplo__statu__2C3393D0">
+            <End Role="tbl_departments" EntitySet="tbl_departments" />
+            <End Role="tbl_EmployeWorkingStatus" EntitySet="tbl_EmployeWorkingStatus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PayrollManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_departments">
+          <Key>
+            <PropertyRef Name="dept_id" />
+          </Key>
+          <Property Name="dept_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dept_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_EmployeWorkingStatus" Relationship="Self.FK__tbl_Emplo__statu__2C3393D0" FromRole="tbl_departments" ToRole="tbl_EmployeWorkingStatus" />
+        </EntityType>
+        <EntityType Name="tbl_employee">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emp_contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emp_cnic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emp_dob" Type="DateTime" Precision="0" />
+          <Property Name="emp_image" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="emp_gender" Type="Boolean" />
+          <Property Name="emp_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emp_hireDate" Type="DateTime" Precision="0" />
+          <Property Name="emp_status" Type="Boolean" />
+          <NavigationProperty Name="tbl_EmployeWorkingStatus" Relationship="Self.FK__tbl_Emplo__statu__2B3F6F97" FromRole="tbl_employee" ToRole="tbl_EmployeWorkingStatus" />
+        </EntityType>
+        <EntityType Name="tbl_EmployeWorkingStatus">
+          <Key>
+            <PropertyRef Name="status_id" />
+          </Key>
+          <Property Name="status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status_emp_fk" Type="Int32" />
+          <Property Name="status_dep_fk" Type="Int32" />
+          <Property Name="status_year" Type="Int32" />
+          <Property Name="status_basicSalary" Type="Double" />
+          <Property Name="status_bonus" Type="Double" />
+          <Property Name="status_medical" Type="Double" />
+          <Property Name="staus_casualLeave" Type="Int32" />
+          <Property Name="staus_sickLeave" Type="Int32" />
+          <Property Name="staus_halfDays" Type="Int32" />
+          <Property Name="staus_anualLeave" Type="Int32" />
+          <NavigationProperty Name="tbl_departments" Relationship="Self.FK__tbl_Emplo__statu__2C3393D0" FromRole="tbl_EmployeWorkingStatus" ToRole="tbl_departments" />
+          <NavigationProperty Name="tbl_employee" Relationship="Self.FK__tbl_Emplo__statu__2B3F6F97" FromRole="tbl_EmployeWorkingStatus" ToRole="tbl_employee" />
+        </EntityType>
+        <Association Name="FK__tbl_Emplo__statu__2C3393D0">
+          <End Role="tbl_departments" Type="Self.tbl_departments" Multiplicity="0..1" />
+          <End Role="tbl_EmployeWorkingStatus" Type="Self.tbl_EmployeWorkingStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_departments">
+              <PropertyRef Name="dept_id" />
+            </Principal>
+            <Dependent Role="tbl_EmployeWorkingStatus">
+              <PropertyRef Name="status_dep_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Emplo__statu__2B3F6F97">
+          <End Role="tbl_employee" Type="Self.tbl_employee" Multiplicity="0..1" />
+          <End Role="tbl_EmployeWorkingStatus" Type="Self.tbl_EmployeWorkingStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_employee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tbl_EmployeWorkingStatus">
+              <PropertyRef Name="status_emp_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PayrollManagementSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_departments" EntityType="Self.tbl_departments" />
+          <EntitySet Name="tbl_employee" EntityType="Self.tbl_employee" />
+          <EntitySet Name="tbl_EmployeWorkingStatus" EntityType="Self.tbl_EmployeWorkingStatus" />
+          <AssociationSet Name="FK__tbl_Emplo__statu__2C3393D0" Association="Self.FK__tbl_Emplo__statu__2C3393D0">
+            <End Role="tbl_departments" EntitySet="tbl_departments" />
+            <End Role="tbl_EmployeWorkingStatus" EntitySet="tbl_EmployeWorkingStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Emplo__statu__2B3F6F97" Association="Self.FK__tbl_Emplo__statu__2B3F6F97">
+            <End Role="tbl_employee" EntitySet="tbl_employee" />
+            <End Role="tbl_EmployeWorkingStatus" EntitySet="tbl_EmployeWorkingStatus" />
+          </AssociationSet>
+          <EntitySet Name="VW_GETEMPLOYEE" EntityType="PayrollManagementSystemModel.VW_GETEMPLOYEE" />
+          <EntitySet Name="tbl_feedback" EntityType="PayrollManagementSystemModel.tbl_feedback" />
+          <EntitySet Name="tbl_login" EntityType="PayrollManagementSystemModel.tbl_login" />
+          <EntitySet Name="tbl_inquiry" EntityType="PayrollManagementSystemModel.tbl_inquiry" />
+        </EntityContainer>
+        <EntityType Name="VW_GETEMPLOYEE">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="CNIC" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CNIC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_of_Birth" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hire_Date" Type="DateTime" Precision="0" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Basic_Salary" Type="Double" />
+          <Property Name="Annual_Bonus" Type="Double" />
+          <Property Name="Medical_Alowance" Type="Double" />
+          <Property Name="Annual_Casual_Leaves" Type="Int32" />
+          <Property Name="Sick_Leaves" Type="Int32" />
+          <Property Name="Annual_Leaves" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_feedback">
+          <Key>
+            <PropertyRef Name="fb_id" />
+          </Key>
+          <Property Name="fb_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fb_name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="fb_phone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="fb_email" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="fb_company" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="fb_feedback" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_login">
+          <Key>
+            <PropertyRef Name="login_id" />
+          </Key>
+          <Property Name="login_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="pasword" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_inquiry">
+          <Key>
+            <PropertyRef Name="iq_id" />
+          </Key>
+          <Property Name="iq_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iq_name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="iq_email" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="iq_phone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="iq_company" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="iq_query" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PayrollManagementSystemModelStoreContainer" CdmEntityContainer="PayrollManagementSystemEntities">
+          <EntitySetMapping Name="tbl_departments">
+            <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_departments">
+              <MappingFragment StoreEntitySet="tbl_departments">
+                <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+                <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_employee">
+            <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_employee">
+              <MappingFragment StoreEntitySet="tbl_employee">
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+                <ScalarProperty Name="emp_contact" ColumnName="emp_contact" />
+                <ScalarProperty Name="emp_cnic" ColumnName="emp_cnic" />
+                <ScalarProperty Name="emp_dob" ColumnName="emp_dob" />
+                <ScalarProperty Name="emp_image" ColumnName="emp_image" />
+                <ScalarProperty Name="emp_gender" ColumnName="emp_gender" />
+                <ScalarProperty Name="emp_email" ColumnName="emp_email" />
+                <ScalarProperty Name="emp_hireDate" ColumnName="emp_hireDate" />
+                <ScalarProperty Name="emp_status" ColumnName="emp_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_EmployeWorkingStatus">
+            <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_EmployeWorkingStatus">
+              <MappingFragment StoreEntitySet="tbl_EmployeWorkingStatus">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="status_emp_fk" ColumnName="status_emp_fk" />
+                <ScalarProperty Name="status_dep_fk" ColumnName="status_dep_fk" />
+                <ScalarProperty Name="status_year" ColumnName="status_year" />
+                <ScalarProperty Name="status_basicSalary" ColumnName="status_basicSalary" />
+                <ScalarProperty Name="status_bonus" ColumnName="status_bonus" />
+                <ScalarProperty Name="status_medical" ColumnName="status_medical" />
+                <ScalarProperty Name="staus_casualLeave" ColumnName="staus_casualLeave" />
+                <ScalarProperty Name="staus_sickLeave" ColumnName="staus_sickLeave" />
+                <ScalarProperty Name="staus_halfDays" ColumnName="staus_halfDays" />
+                <ScalarProperty Name="staus_anualLeave" ColumnName="staus_anualLeave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_GETEMPLOYEE">
+            <EntityTypeMapping TypeName="PayrollManagementSystemModel.VW_GETEMPLOYEE">
+              <MappingFragment StoreEntitySet="VW_GETEMPLOYEE">
+                <ScalarProperty Name="Annual_Leaves" ColumnName="Annual Leaves" />
+                <ScalarProperty Name="Sick_Leaves" ColumnName="Sick Leaves" />
+                <ScalarProperty Name="Annual_Casual_Leaves" ColumnName="Annual Casual Leaves" />
+                <ScalarProperty Name="Medical_Alowance" ColumnName="Medical Alowance" />
+                <ScalarProperty Name="Annual_Bonus" ColumnName="Annual Bonus" />
+                <ScalarProperty Name="Basic_Salary" ColumnName="Basic Salary" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Hire_Date" ColumnName="Hire Date" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date of Birth" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_feedback">
+            <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_feedback">
+              <MappingFragment StoreEntitySet="tbl_feedback">
+                <ScalarProperty Name="fb_feedback" ColumnName="fb_feedback" />
+                <ScalarProperty Name="fb_company" ColumnName="fb_company" />
+                <ScalarProperty Name="fb_email" ColumnName="fb_email" />
+                <ScalarProperty Name="fb_phone" ColumnName="fb_phone" />
+                <ScalarProperty Name="fb_name" ColumnName="fb_name" />
+                <ScalarProperty Name="fb_id" ColumnName="fb_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_login">
+            <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_login">
+              <MappingFragment StoreEntitySet="tbl_login">
+                <ScalarProperty Name="pasword" ColumnName="pasword" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="login_id" ColumnName="login_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_inquiry">
+            <EntityTypeMapping TypeName="PayrollManagementSystemModel.tbl_inquiry">
+              <MappingFragment StoreEntitySet="tbl_inquiry">
+                <ScalarProperty Name="iq_query" ColumnName="iq_query" />
+                <ScalarProperty Name="iq_company" ColumnName="iq_company" />
+                <ScalarProperty Name="iq_phone" ColumnName="iq_phone" />
+                <ScalarProperty Name="iq_email" ColumnName="iq_email" />
+                <ScalarProperty Name="iq_name" ColumnName="iq_name" />
+                <ScalarProperty Name="iq_id" ColumnName="iq_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
